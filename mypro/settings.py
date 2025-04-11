@@ -16,7 +16,12 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 AUTH_USER_MODEL = 'jango.CustomUser'
-ALLOWED_HOSTS = ['onlineplatform.onrender.com']
+ALLOWED_HOSTS = [
+    'onlineplatform.onrender.com',  # existing production host
+    '127.0.0.1',                    # local development host
+    'localhost'                    # optional, for browser access using 'localhost'
+]
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 

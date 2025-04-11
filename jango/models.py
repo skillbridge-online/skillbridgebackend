@@ -21,7 +21,8 @@ class CustomUser(AbstractUser):
     last_name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=128)
-    user_token = models.CharField(max_length=64, blank=True, null=True, unique=True)
+    user_token = models.CharField(max_length=64, blank=True, null=True)  # Add this field
+
     role = models.CharField(max_length=10, choices=ROLE_CHOICES)
     profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
     phone = models.CharField(max_length=15, null=True, blank=True)
@@ -39,8 +40,15 @@ class CustomUser(AbstractUser):
         related_name="custom_user_permissions_set",  # Custom related_name to avoid conflict
         blank=True
     )
+    
+    def generate_token(self):
+        import secrets
+        self.user_token = secrets.token_hex(16)
+        self.save(update_fields=['user_token'])
+        
     def __str__(self):
         return f"{self.name} - {self.role}"
+
 class Test(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
@@ -61,8 +69,8 @@ class Test(models.Model):
     end_date = models.DateField(blank=True, null=True)
     due_time = models.TimeField(blank=True, null=True)
     total_marks = models.IntegerField(null=True, blank=True)
-    isDuplicated = models.BooleanField(default=False)
-    # ✅ Add these missing fields
+    receive_email_notifications = models.BooleanField(default=False)
+    notification_emails = models.TextField(blank=True)  # Or CharField if you prefer
     is_public = models.BooleanField(default=True)
     is_proctored = models.BooleanField(default=False)
     allow_retakes = models.BooleanField(default=False)
@@ -93,7 +101,13 @@ class Question(models.Model):
     type = models.CharField(max_length=50, choices=QUESTION_TYPES)
     options = models.JSONField(default=list, blank=True, null=True)  # ✅ Default to empty list
     correct_answer = models.JSONField(default=list, blank=True)
+    
+class AllowedParticipant(models.Model):
+    test = models.ForeignKey(Test, on_delete=models.CASCADE, related_name='allowed_participants')
+    email = models.EmailField()
 
+    def __str__(self):
+        return f"{self.email} for {self.test.title}"
 class Category(models.Model):
     category_name = models.CharField(max_length=255)
     description = models.TextField()
