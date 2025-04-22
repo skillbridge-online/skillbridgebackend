@@ -99,11 +99,14 @@ CSRF_COOKIE_SAMESITE = None
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'lunaaroraa$default',
-        'USER': 'lunaaroraa',
-        'PASSWORD': '#Vig@123',
-        'HOST': 'lunaaroraa.mysql.pythonanywhere-services.com',
-        'PORT': '3306',
+        'NAME': 'railway',
+        'USER': 'root',
+        'PASSWORD': 'DcKgjWaUjsGlmrnngyhjdmmiwbQRCvqn',
+        'HOST': 'gondola.proxy.rlwy.net',
+        'PORT': '43498',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        }
     }
 }
 
