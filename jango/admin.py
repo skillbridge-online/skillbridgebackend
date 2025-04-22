@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Test, TestAttempt, UserAnswer,RecentActivity
+from .models import Test, TestAttempt,Question, UserAnswer,RecentActivity
 
 @admin.register(Test)
 class TestAdmin(admin.ModelAdmin):
@@ -23,7 +23,12 @@ class UserAnswerAdmin(admin.ModelAdmin):
 class RecentActivityAdmin(admin.ModelAdmin):
     list_display = ('user', 'description', 'details','timestamp')
     search_fields = ('description',)
-    
+
+class QuestionAdmin(admin.ModelAdmin):
+    list_filter = ['test']
+
+admin.site.register(Question)       
+
 admin.site.register(RecentActivity, RecentActivityAdmin) 
 from .models import Announcement, Notification
 
