@@ -12,9 +12,12 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+import pymysql
+pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 AUTH_USER_MODEL = 'jango.CustomUser'
 ALLOWED_HOSTS = [
     'onlineplatform.onrender.com',  # existing production host
@@ -82,7 +85,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mypro.wsgi.application'
 
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:3000"
+    "http://localhost:3000","https://onlinetestplatform-frontend.vercel.app",
 ]
 CSRF_COOKIE_SECURE = False
 CSRF_USE_SESSIONS = False
@@ -94,11 +97,14 @@ CSRF_COOKIE_SAMESITE = None
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'lunaaroraa$default',
+        'USER': 'lunaaroraa',
+        'PASSWORD': '#Vig@123',
+        'HOST': 'lunaaroraa.mysql.pythonanywhere-services.com',
+        'PORT': '3306',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -118,7 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000", "http://localhost:3001", # Allow frontend to make API requests
+    "http://localhost:3000", "https://onlinetestplatform-frontend.vercel.app", # Allow frontend to make API requests
 ]
 
 CORS_ALLOW_CREDENTIALS = True 
