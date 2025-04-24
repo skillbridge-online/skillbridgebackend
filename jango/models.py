@@ -424,6 +424,7 @@ class Achievement(models.Model):
 class Announcement(models.Model):
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="announcements", null=True, blank=True)
     title = models.CharField(max_length=255)
+    date = models.DateField(null=False)
     message = models.TextField()
     audience = models.CharField(
         max_length=50, 
