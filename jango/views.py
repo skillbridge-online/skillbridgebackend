@@ -535,12 +535,14 @@ class QuestionList(generics.ListCreateAPIView):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
     permission_classes = [IsAuthenticated]
+
 from rest_framework.decorators import api_view
 
 class TestDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Test.objects.all()
     serializer_class = TestSerializer
     permission_classes = [IsAuthenticated]
+
 from rest_framework.decorators import api_view
 @api_view(["POST"])
 def create_test(request):
@@ -659,7 +661,7 @@ class ManageTestsViewSet(viewsets.ModelViewSet):
 
 # Question Views
 class QuestionListCreateView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def get(self, request):
         questions = Question.objects.all()
@@ -679,7 +681,7 @@ class QuestionListCreateView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class QuestionDetailAPIView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def get_object(self, pk):
         try:
@@ -1232,7 +1234,7 @@ def user_attempted_tests(request):
     return Response(serializer.data)
 from django.db.models import Avg, Count, F
 @api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def leaderboard(request):
     """
     Retrieves leaderboard with all test attempts by each user.
