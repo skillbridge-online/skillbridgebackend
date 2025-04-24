@@ -17,7 +17,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 AUTH_USER_MODEL = 'jango.CustomUser'
 ALLOWED_HOSTS = [
-    'onlineplatform.onrender.com',  # existing production host
+    'skillbridgebackend-hpgv.onrender.com',  # existing production host
     '127.0.0.1',                    # local development host
     'localhost'                    # optional, for browser access using 'localhost'
 ]
