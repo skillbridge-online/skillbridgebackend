@@ -1320,8 +1320,7 @@ def upload_allowed_emails(request):
     secure_uuid = encode_testid_to_secure_uuid(test.id)
 
     # ✅ Build full test link
-    BASE_URL = "https://onlinetestplatformfrontend.vercel.app/"
-    random_string = "sharelink"  # or generate dynamically
+    BASE_URL = "https://onlinetestplatform-frontend.vercel.app/"
     test_link = f"{BASE_URL}/smartbridge/online-test-assessment/{secure_uuid}"
 
     # ✅ Send email invitations

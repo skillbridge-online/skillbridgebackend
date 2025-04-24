@@ -12,12 +12,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
-import pymysql
-pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 AUTH_USER_MODEL = 'jango.CustomUser'
 ALLOWED_HOSTS = [
     'onlineplatform.onrender.com',  # existing production host
@@ -36,7 +33,6 @@ DEBUG = True
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
-STATIC_URL = '/static/'
 
 # Application definition
 
@@ -98,17 +94,11 @@ CSRF_COOKIE_SAMESITE = None
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'railway',
-        'USER': 'root',
-        'PASSWORD': 'DcKgjWaUjsGlmrnngyhjdmmiwbQRCvqn',
-        'HOST': 'gondola.proxy.rlwy.net',
-        'PORT': '43498',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -128,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000", "https://onlinetestplatform-frontend.vercel.app", # Allow frontend to make API requests
+    "http://localhost:3000", "http://localhost:3001","https://onlinetestplatform-frontend.vercel.app", # Allow frontend to make API requests
 ]
 
 CORS_ALLOW_CREDENTIALS = True 
