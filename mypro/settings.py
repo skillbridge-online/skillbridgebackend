@@ -82,7 +82,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mypro.wsgi.application'
 
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:3000","https://onlinetestplatform-frontend.vercel.app",
+    "http://localhost:3000","https://skillbridgefrontend.vercel.app/",
 ]
 CSRF_COOKIE_SECURE = False
 CSRF_USE_SESSIONS = False
@@ -118,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000", "http://localhost:3001","https://onlinetestplatform-frontend.vercel.app", # Allow frontend to make API requests
+    "http://localhost:3000", "http://localhost:3001","https://skillbridgefrontend.vercel.app/", # Allow frontend to make API requests
 ]
 
 CORS_ALLOW_CREDENTIALS = True 
