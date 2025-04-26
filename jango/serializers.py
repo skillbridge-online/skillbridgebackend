@@ -92,7 +92,7 @@ class LeaderboardEntrySerializer(serializers.ModelSerializer):
 class AnnouncementSerializer(serializers.ModelSerializer):
     class Meta:
         model = Announcement
-        fields = '__all__'  # Add relevant fields
+        fields = ['id','title', 'message', 'created_by']  # Add relevant fields
 
 class NotificationSerializer(serializers.ModelSerializer):
     announcement = AnnouncementSerializer()  # Nest announcement details

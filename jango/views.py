@@ -535,14 +535,12 @@ class QuestionList(generics.ListCreateAPIView):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
     permission_classes = [IsAuthenticated]
-
 from rest_framework.decorators import api_view
 
 class TestDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Test.objects.all()
     serializer_class = TestSerializer
     permission_classes = [IsAuthenticated]
-
 from rest_framework.decorators import api_view
 @api_view(["POST"])
 def create_test(request):
@@ -661,7 +659,7 @@ class ManageTestsViewSet(viewsets.ModelViewSet):
 
 # Question Views
 class QuestionListCreateView(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         questions = Question.objects.all()
@@ -681,7 +679,7 @@ class QuestionListCreateView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class QuestionDetailAPIView(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def get_object(self, pk):
         try:
@@ -1234,7 +1232,7 @@ def user_attempted_tests(request):
     return Response(serializer.data)
 from django.db.models import Avg, Count, F
 @api_view(['GET', 'POST'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def leaderboard(request):
     """
     Retrieves leaderboard with all test attempts by each user.
@@ -1322,7 +1320,8 @@ def upload_allowed_emails(request):
     secure_uuid = encode_testid_to_secure_uuid(test.id)
 
     # ✅ Build full test link
-    BASE_URL = "https://onlinetestplatform-frontend.vercel.app/"
+    BASE_URL = "https://onlinetestplatformfrontend.vercel.app/"
+    random_string = "sharelink"  # or generate dynamically
     test_link = f"{BASE_URL}/smartbridge/online-test-assessment/{secure_uuid}"
 
     # ✅ Send email invitations
